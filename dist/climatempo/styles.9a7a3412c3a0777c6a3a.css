@@ -1,0 +1,1 @@
+:root{font-size:60%;--color-background:#99c0da;--color-primary:#fff}*{margin:0;padding:0;box-sizing:border-box}body,button,input,textarea{font:500 1.6rem Poppins}body{display:flex;justify-content:center;background:var(--color-background);height:100%}
