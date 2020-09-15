@@ -1,0 +1,21 @@
+
+<div id="search-prevision">
+    <input id="find" list="items" (keyup)="getCity()" value="Vila Velha,ES" placeholder="Cidade, UF" > 
+    <datalist id="items">
+        <option *ngFor="let city of cities" >
+            {{city.nome}},{{city.uf}}
+        </option>
+    </datalist>
+    <button id="searchPrevision" (click)="getPrevision()">Buscar</button>
+</div>
+<div id="previsions-container">
+    <div class="prevision-day" *ngFor="let prevision of previsions" >
+        <p> {{prevision.dia[0]}} </p>
+        <p> Max: {{prevision.maxima[0]}}º </p>
+        <p> Mín: {{prevision.minima[0]}}º </p>
+        <img src={{prevision.condition[0].icon}} alt="">
+        <p class="description">{{prevision.condition[0].description}}</p>
+    </div>
+</div>
+
+<router-outlet></router-outlet>

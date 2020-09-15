@@ -1,0 +1,78 @@
+
+:host{
+    width: 65rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 10rem 2rem ; 
+    margin-bottom: 2rem;
+}
+
+#search-prevision{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1.6rem 0.8rem;
+    box-sizing: border-box;
+    flex-wrap: nowrap; 
+}
+
+#search-prevision input{
+    border: none;
+    min-width: 20rem;
+    width: calc(100% - 12rem);
+    padding: 0.8rem;
+    border-radius: 1.5rem 0 0 1.5rem ;  
+}
+#search-prevision button{
+    color: white;
+    font-size: 1.8rem;
+    border: none;
+    background: cornflowerblue;
+    width: 12rem;
+    height: 100%;
+    margin: 0;
+    border-radius: 0px 1.5rem 1.5rem 0;
+}
+
+#previsions-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#previsions-container .prevision-day{
+    background: var(--color-primary);
+    width: 100%;
+    height: 20rem;
+    border-radius: 1rem;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 1.6rem 0.8rem;
+    box-shadow:  0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+#previsions-container .prevision-day img{
+    width: 4.8rem;
+}
+
+#previsions-container .prevision-day .description{
+    font-size: 1.2rem;
+}
+
+@media (min-width: 500px){
+
+    #search-prevision input{ 
+        border-radius: 1.5rem 0 0 1.5rem ;        
+    }
+    #previsions-container .prevision-day{
+        max-width: 20rem;
+    }
+}
+
