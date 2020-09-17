@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { PrevisionService } from './service/prevision.service';
 import { FunctionsService } from './service/functions.service';
 import { DataService } from './model/data-service';
+import { TestBed } from '@angular/core/testing';
+import { resolve } from 'dns';
+import { rejects } from 'assert';
 
 @Component({
   selector: 'app-root',
@@ -28,16 +31,21 @@ export class AppComponent {
     return js;
   }
 
-   public getCity(){
-    let search = (<HTMLInputElement>document.getElementById("find")).value.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-    let city = search.split(',')[0]
-    if(city){
-      this.citiesService.getCities(city).subscribe(res => {
-        this.cities = this.trataRetornoCidades(this.functions.convertXmlToJson(res));
-      })
-    }else{ 
-      this.cities = [];
-    }
+  public getCity(){
+    return new Promise((resolve,reject) => {
+      let search = (<HTMLInputElement>document.getElementById("find")).value.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+      let city = search.split(',')[0]
+    
+      if(city){
+        this.citiesService.getCities(city).subscribe(res => {
+          this.cities = this.trataRetornoCidades(this.functions.convertXmlToJson(res));
+          resolve();
+        })
+      }else{ 
+        this.cities = [];
+        reject();
+      }
+    }); 
   }
 
   public getPrevision(){
@@ -46,7 +54,6 @@ export class AppComponent {
     let cidade = spl[0];
     let uf = spl[1];
     let codCity;
-    console.log(this.cities);
     
     try {
       codCity = this.cities.filter( city => ( city.nome[0] == cidade && city.uf == uf ))[0].id[0];
@@ -61,6 +68,7 @@ export class AppComponent {
         this.previsions.forEach(prevision => {
           prevision['condition'] = [...this.dataService.getConditions().filter(e=> (e.sigla == prevision.tempo))];
           prevision.dia[0] = this.functions.convertDate(prevision.dia[0]);
+          
         });
       })
     }else{ 
@@ -69,11 +77,9 @@ export class AppComponent {
 
   }
 
-  ngOnInit(): void{
-    this.getCity();
-    window.setTimeout(function(){
-      document.getElementById("searchPrevision").click();
-    }, 400);
+  async ngOnInit(){
+    await this.getCity();
+    document.getElementById("searchPrevision").click();
   }
-
+  
 }

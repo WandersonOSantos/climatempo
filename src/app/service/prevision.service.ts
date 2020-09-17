@@ -11,12 +11,12 @@ export class PrevisionService {
   }
 
   public getCities(city): Observable<any>{
-    let apiUrl ='http://servicos.cptec.inpe.br/XML/listaCidades?';
+    let apiUrl ='https://cors-anywhere.herokuapp.com/http://servicos.cptec.inpe.br/XML/listaCidades?';
     return this.http.get(apiUrl + 'city=' + city, { responseType: 'text' })
   }
 
   public getPrevision(codCity): Observable<any>{
-    let apiUrl ='http://servicos.cptec.inpe.br/XML/cidade/7dias/'+ codCity +'/previsao.xml';
+    let apiUrl ='https://cors-anywhere.herokuapp.com/http://servicos.cptec.inpe.br/XML/cidade/7dias/'+ codCity +'/previsao.xml';
     return this.http.get(apiUrl, { responseType: 'text' })
   }
 
